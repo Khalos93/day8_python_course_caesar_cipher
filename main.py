@@ -9,7 +9,7 @@ using_the_program = True
 
 while using_the_program:
 
-    direction = input("Type 'encode' to encrypt, 'decode to decrypt:\n").lower()
+    direction = input("Type 'encode' to encrypt, 'decode' to decrypt:\n").lower()
     direction_successful = is_direction_valid(direction, possible_directions)
 
     while not direction_successful:
@@ -17,22 +17,21 @@ while using_the_program:
         direction_successful = is_direction_valid(direction, possible_directions)
 
     text = input("Type your message:\n").lower()
-    next_step = validate_text(text)
-    while not next_step:
+    is_text_valid = validate_text(text)
+    while not is_text_valid:
         text = input("Wrong input! Type a valid message please:\n").lower()
-        next_step = validate_text(text)
+        is_text_valid = validate_text(text)
 
     shift = int(input("Type the shift number:\n"))
-    further_step = validate_shift(shift)
-    while not further_step:
+    is_shift_valid = validate_shift(shift)
+    while not is_shift_valid:
         shift = int(input("Type a valid shift number:\n"))
-        further_step = validate_shift(shift)
+        is_shift_valid = validate_shift(shift)
 
-    if direction == encode:
-        print(encrypt(text, shift))
+    cipher_func = encrypt if direction == encode else decrypt
+    print(cipher_func(text, shift))
 
-    else:
-        print(decrypt(text, shift))
+    keep_using_the_cipher = input("Do you want to encode / decode more ? Y or N").lower()
 
-
-
+    if keep_using_the_cipher == 'n':
+        using_the_program = False
