@@ -11,3 +11,5 @@
  # macOS
  .DS_Storeated by virtualenv automatically
 
+ __pycache__/
+__pycache__/
